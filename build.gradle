@@ -1,0 +1,51 @@
+group 'ru.endlesscode.miet.testing'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlinVersion = '1.2.30'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+apply plugin: 'kotlin'
+
+ext {
+    seleniumVersion = '3.8.0'
+    kirkVersion = '0.8.+'
+    cucumberVersion = "1.2.5"
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+    implementation "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+    implementation "com.automation-remarks:kirk:$kirkVersion"
+    testImplementation "info.cukes:cucumber-junit:$cucumberVersion"
+    testImplementation "info.cukes:cucumber-java8:$cucumberVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
